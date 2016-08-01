@@ -1,8 +1,12 @@
 
 ## Credits
+
 Contributors:
-Jeffrey Underdown
-Sean Aguirre
+
+Jeffrey Underdown https://github.com/junderdo
+
+Sean Aguirre https://github.com/rufio0425
+
 
 Built on the MEANjs.org platform
 

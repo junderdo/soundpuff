@@ -6,3 +6,10 @@ module.exports.profileUploadFileFilter = function (req, file, cb) {
   }
   cb(null, true);
 };
+
+module.exports.soundUploadFileFilter = function (req, file, cb) {
+  if (file.mimetype !== 'audio/wav' && file.mimetype !== 'audio/mpeg') {
+    return cb(new Error('Only WAV and MP3 files are allowed!'), false);
+  }
+  cb(null, true);
+};
