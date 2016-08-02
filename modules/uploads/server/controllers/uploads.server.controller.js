@@ -4,62 +4,31 @@
  * Module dependencies.
  */
 var path = require('path'),
+  fs = require('fs'),
   mongoose = require('mongoose'),
   Upload = mongoose.model('Upload'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  multer = require('multer'),
+  config = require(path.resolve('./config/config')),
   _ = require('lodash');
 
 
-
-/**
- * Receive sound file upload
- */
-exports.uploadSound = function(req, res) {
-
-}
-
-
-/**
- * Create a Upload
- */
-exports.create = function(req, res) {
-  var user = req.user;
-
-  var upload = new Upload(req.body);
-  upload.user = req.user;
-
+exports.uploadSound = function (req, res) {
   var message = null;
-  var upload = multer(config.uploads.soundUpload).single('newSoundFile');
+  var uploader = multer(config.uploads.soundUpload).single('newSoundUpload');
   var soundUploadFileFilter = require(path.resolve('./config/lib/multer')).soundUploadFileFilter;
 
   // Filtering to upload only images
-  upload.fileFilter = soundUploadFileFilter;
+  uploader.fileFilter = soundUploadFileFilter;
 
-  if (user) {
-    upload(req, res, function (uploadError) {
+  if (uploader) {
+    uploader(req, res, function (uploadError) {
       if(uploadError) {
         return res.status(400).send({
           message: 'Error occurred while uploading sound'
         });
       } else {
-        upload.filePath = config.uploads.profileUpload.dest + req.file.filename;
-
-        upload.save(function(err) {
-          if (err) {
-            return res.status(400).send({
-              message: errorHandler.getErrorMessage(err)
-            });
-          } else {
-            // save the file to filesystem
-            fs.readFile(req.files.soundFile.path, function (err, data) {
-              var newPath = __dirname + "/uploads/uploadedFileName";
-              fs.writeFile(newPath, data, function (err) {
-                // send response
-                res.jsonp(upload);
-              });
-            });
-          }
-        });
+        res.json({'status': 'ok'});
       }
     });
   } else {
@@ -67,6 +36,28 @@ exports.create = function(req, res) {
       message: 'User is not signed in'
     });
   }
+};
+
+/**
+ * Create a Upload
+ */
+exports.create = function(req, res) {
+  var upload = new Upload(req.body);
+  upload.user = req.user;
+
+  var message = null;
+
+  upload.save(function(err) {
+    //  upload.filePath = config.uploads.soundUpload.dest + req.file.filename;
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp(upload);
+    }
+  });
+
 };
 
 /**

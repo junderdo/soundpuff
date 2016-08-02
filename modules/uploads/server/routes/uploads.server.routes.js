@@ -12,6 +12,9 @@ module.exports = function(app) {
     .get(uploads.list)
     .post(uploads.create);
 
+  app.route('/api/uploads/receive').all(uploadsPolicy.isAllowed)
+    .post(uploads.uploadSound);
+
   app.route('/api/uploads/:uploadId').all(uploadsPolicy.isAllowed)
     .get(uploads.read)
     .put(uploads.update)

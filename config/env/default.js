@@ -35,6 +35,12 @@ module.exports = {
       limits: {
         fileSize: 1*1024*1024 // Max file size in bytes (1 MB)
       }
+    },
+    soundUpload: {
+      dest: './modules/uploads/uploaded/', // Profile upload destination path
+      limits: {
+        fileSize: 200*1024*1024 // Max file size in bytes (200 MB)
+      }
     }
   }
 };

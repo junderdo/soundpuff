@@ -20,6 +20,10 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/uploads/:uploadId',
       permissions: '*'
+    },
+    {
+      resources: '/api/uploads/receive',
+      permissions: '*'
     }]
   }, {
     roles: ['user'],
@@ -29,6 +33,10 @@ exports.invokeRolesPolicies = function () {
     }, {
       resources: '/api/uploads/:uploadId',
       permissions: ['get']
+    },
+    {
+      resources: '/api/uploads/receive',
+      permissions: ['post']
     }]
   }, {
     roles: ['guest'],
