@@ -30,10 +30,6 @@ _site/
 # ======================
 mongodb/*
 
-# Uploaded sounds
-# ======================
-modules/uploads/uploaded/*
-
 # General
 # =======
 *.log
