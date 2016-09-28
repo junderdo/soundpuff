@@ -2,7 +2,7 @@
 
 module.exports = {
   app: {
-    title: 'MEAN.JS',
+    title: 'SoundPuff',
     description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
     keywords: 'mongodb, express, angularjs, node.js, mongoose, passport',
     googleAnalyticsTrackingID: process.env.GOOGLE_ANALYTICS_TRACKING_ID || 'GOOGLE_ANALYTICS_TRACKING_ID'
@@ -37,7 +37,7 @@ module.exports = {
       }
     },
     soundUpload: {
-      dest: './modules/uploads/uploaded/', // Profile upload destination path
+      dest: './modules/uploads/client/uploaded/', // Profile upload destination path
       limits: {
         fileSize: 200*1024*1024 // Max file size in bytes (200 MB)
       }

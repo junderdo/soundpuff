@@ -14,6 +14,9 @@
         <span data-ng-if="!upload.user">Deleted User</span>
       </small>
       <h4 class="list-group-item-heading" data-ng-bind="upload.name"></h4>
+      <div>
+        <span data-ng-bind="upload.filePath"></span>
+      </div>
     </a>
   </div>
   <div class="alert alert-warning text-center" data-ng-if="vm.uploads.$resolved && !vm.uploads.length">

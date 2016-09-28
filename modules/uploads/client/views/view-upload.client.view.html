@@ -1,6 +1,9 @@
 <section>
   <div class="page-header">
     <h1 data-ng-bind="vm.upload.name"></h1>
+    <!-- put the streamer here -->
+    <div id="audiostream" data-src="{{vm.upload.filePath}}"></div>
+
   </div>
   <div class="pull-right"
        data-ng-show="vm.upload.isCurrentUserOwner">

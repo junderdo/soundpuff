@@ -13,6 +13,9 @@ var path = require('path'),
   _ = require('lodash');
 
 
+var uploadedFilename = '';
+
+
 exports.uploadSound = function (req, res) {
   var message = null;
   var uploader = multer(config.uploads.soundUpload).single('newSoundUpload');
@@ -28,7 +31,14 @@ exports.uploadSound = function (req, res) {
           message: 'Error occurred while uploading sound'
         });
       } else {
-        res.json({'status': 'ok'});
+        uploadedFilename = req.file.filename;
+
+        console.log('filename: ');
+        console.log(req.file.filename);
+
+        res.json({
+          'status': 'ok'
+        });
       }
     });
   } else {
@@ -44,11 +54,12 @@ exports.uploadSound = function (req, res) {
 exports.create = function(req, res) {
   var upload = new Upload(req.body);
   upload.user = req.user;
+  upload.filePath = config.uploads.soundUpload.dest + uploadedFilename;
 
   var message = null;
 
   upload.save(function(err) {
-    //  upload.filePath = config.uploads.soundUpload.dest + req.file.filename;
+
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)

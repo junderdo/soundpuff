@@ -33,7 +33,7 @@
       }
     });
 
-    // Called after the user selected a new picture file
+    // Called after the user selected a new sound file
     $scope.uploader.onAfterAddingFile = function (fileItem) {
       if ($window.FileReader) {
         var fileReader = new FileReader();
@@ -72,7 +72,7 @@
     $scope.uploadSound = function () {
       // Clear messages
       $scope.success = $scope.error = null;
-
+      
       // Start upload
       $scope.uploader.uploadAll();
     };
@@ -82,6 +82,9 @@
       $scope.uploader.clearQueue();
     };
 
+    $scope.saveSound = function () {
+      save(true);
+    };
 
     // Remove existing Upload
     function remove() {

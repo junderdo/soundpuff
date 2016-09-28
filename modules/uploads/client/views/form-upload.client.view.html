@@ -3,7 +3,7 @@
     <h1>{{vm.upload._id ? 'Edit Upload' : 'New Upload'}}</h1>
   </div>
   <div class="col-md-12">
-    <form name="vm.form.uploadForm" class="form-horizontal" ng-submit="vm.save(vm.form.uploadForm.$valid)">
+    <form name="vm.form.uploadForm" class="form-horizontal"> <!--ng-submit="vm.save(vm.form.uploadForm.$valid)">-->
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="name">Name</label>
@@ -14,13 +14,16 @@
           <span class="btn btn-default btn-file">
               Select File <input type="file" nv-file-select uploader="uploader">
           </span>
+
+          <span ng-bind="uploader.queue.first.filename"></span>
+
           <div class="text-center form-group" ng-show="uploader.queue.length">
             <button class="btn btn-primary" ng-click="uploadSound();">Upload</button>
             <button class="btn btn-default" ng-click="cancelUpload();">Cancel</button>
           </div>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">Save</button>
+          <button type="submit" class="btn btn-default" ng-click="saveSound();">Save</button>
         </div>
         <div ng-show="vm.error" class="text-danger">
           <strong ng-bind="vm.error"></strong>
