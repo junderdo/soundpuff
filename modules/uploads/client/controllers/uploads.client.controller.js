@@ -18,6 +18,23 @@
     vm.remove = remove;
     vm.save = save;
 
+    function init() {
+      // load the streamer if we're on a view state with an id
+      if (vm.upload._id) {
+        var wavesurfer = $window.WaveSurfer.create({
+          container: '#audiostream',
+          waveColor: 'violet',
+          progressColor: 'purple'
+        });
+
+        wavesurfer.load(vm.upload.filePath);
+
+        wavesurfer.on('ready', function () {
+          wavesurfer.play();
+        });
+      }
+    }
+
     // Create file uploader instance
     $scope.uploader = new FileUploader({
       url: 'api/uploads/receive',
@@ -47,7 +64,7 @@
       }
     };
 
-    // Called after the user has successfully uploaded a new picture
+    // Called after the user has successfully uploaded a new sound
     $scope.uploader.onSuccessItem = function (fileItem, response, status, headers) {
       // Show success message
       $scope.success = true;
@@ -59,7 +76,7 @@
       $scope.cancelUpload();
     };
 
-    // Called after the user has failed to uploaded a new picture
+    // Called after the user has failed to uploaded a new sound
     $scope.uploader.onErrorItem = function (fileItem, response, status, headers) {
       // Clear upload buttons
       $scope.cancelUpload();
@@ -72,7 +89,7 @@
     $scope.uploadSound = function () {
       // Clear messages
       $scope.success = $scope.error = null;
-      
+
       // Start upload
       $scope.uploader.uploadAll();
     };
@@ -123,5 +140,7 @@
         vm.error = res.data.message;
       }
     }
+
+    init();
   }
 })();
