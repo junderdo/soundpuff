@@ -35,3 +35,19 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+/* loaders.css customizations */
+.line-scale-pulse-out > div {
+  background: violet;
+}
+
+.loader-icon {
+  height:128px;
+  margin-top:36px;
+}
+
+/* audio stream div */
+.audiostream {
+  background-color: white;
+  height:128px;
+}

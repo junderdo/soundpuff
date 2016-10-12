@@ -18,20 +18,45 @@
     vm.remove = remove;
     vm.save = save;
 
+
     function init() {
       // load the streamer if we're on a view state with an id
       if (vm.upload._id) {
+
+        // show the loading icon until the stream loads
+        $scope.hideLoadingIcon = false;
+
+        // init the wavesurfer streaming interface
         var wavesurfer = $window.WaveSurfer.create({
           container: '#audiostream',
           waveColor: 'violet',
-          progressColor: 'purple'
+          progressColor: 'purple',
+          barWidth: 2,
+          cursorWidth: 0, // hide the cursor
         });
 
+        // attempt to load the stream
         wavesurfer.load(vm.upload.filePath);
 
         wavesurfer.on('ready', function () {
-          wavesurfer.play();
+          //wavesurfer.play();
+
+          // apply the hideLoadingIcon value of false such that it is re-rendered and hidden
+          $scope.$apply(function() {
+            $scope.hideLoadingIcon = true;
+          });
         });
+
+        // attach the wavesurfer to the controller for later usage
+        vm.wavesurfer = wavesurfer;
+
+
+        // when ths user leaves the view we'll stop playback for now
+        // until we come up with a global playback toolbar (on the bottom of app layout)
+        $scope.$on('$destroy', function() {
+          $scope.stopPlayback();
+        });
+
       }
     }
 
@@ -101,6 +126,18 @@
 
     $scope.saveSound = function () {
       save(true);
+    };
+
+    $scope.startPlayback = function () {
+      vm.wavesurfer.play();
+    };
+
+    $scope.pausePlayback = function () {
+      vm.wavesurfer.pause();
+    };
+
+    $scope.stopPlayback = function () {
+      vm.wavesurfer.stop();
     };
 
     // Remove existing Upload
