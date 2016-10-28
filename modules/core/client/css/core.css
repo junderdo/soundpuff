@@ -1,5 +1,6 @@
 .content {
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 .undecorated-link:hover {
   text-decoration: none;
@@ -50,4 +51,8 @@ a:hover .header-profile-image {
 .audiostream {
   background-color: white;
   height:128px;
+}
+
+.footer {
+  min-height:50px;
 }

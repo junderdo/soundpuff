@@ -25,6 +25,7 @@
 
         // show the loading icon until the stream loads
         $scope.hideLoadingIcon = false;
+        $scope.loadingPercent = '0%';
 
         // init the wavesurfer streaming interface
         var wavesurfer = $window.WaveSurfer.create({
@@ -32,15 +33,25 @@
           waveColor: 'violet',
           progressColor: 'purple',
           barWidth: 2,
-          cursorWidth: 0, // hide the cursor
+          cursorWidth: 0 // hide the cursor
         });
 
         // attempt to load the stream
         wavesurfer.load(vm.upload.filePath);
 
-        wavesurfer.on('ready', function () {
-          //wavesurfer.play();
+        wavesurfer.on('loading', function(percent) {
+          $scope.$apply(function() {
+            if (percent < 100) {
+              $scope.loadingPercent = percent + '%';
+            } else {
+              $scope.loadingPercent = 'processing audio...';
+            }
+          });
+        });
 
+        wavesurfer.on('ready', function () {
+          // auto-start?
+          // wavesurfer.play();
           // apply the hideLoadingIcon value of false such that it is re-rendered and hidden
           $scope.$apply(function() {
             $scope.hideLoadingIcon = true;

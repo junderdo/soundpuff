@@ -8,7 +8,7 @@ Jeffrey Underdown https://github.com/junderdo
 Sean Aguirre https://github.com/rufio0425
 
 
-Built on the MEANjs.org platform
+Built on the MEANjs platform http://meanjs.org/
 
 ## License
 (The MIT License)

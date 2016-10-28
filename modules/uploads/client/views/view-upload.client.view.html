@@ -24,6 +24,7 @@
     <div id="audiostream" class="audiostream" data-src="{{vm.upload.filePath}}">
       <!-- css loader icon -->
       <div class="loader-icon text-center" data-ng-hide="hideLoadingIcon">
+        <div data-ng-bind="loadingPercent"></div>
         <div class="loader-inner line-scale-pulse-out">
           <div></div>
           <div></div>
