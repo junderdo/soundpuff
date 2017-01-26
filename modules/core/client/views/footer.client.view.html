@@ -1,3 +1,26 @@
 <div class="container" ng-controller="FooterController">
-  <!-- playback controls go here -->
+  <div class="footer-controls">
+    <div class="playback-overlay">
+        <span data-ng-bind="streamName" class="white"></span>
+    </div>
+    <div class="playback-controls">
+        <div class="glyphicon {{playbackButtonClass}} playback-control-button" ng-click="togglePlayback();"></div>
+    </div>
+    <!-- wavesurfer audio stream interface -->
+    <div id="audiostream-footer" class="audiostream" data-src="{{vm.upload.filePath}}">
+      <!-- css loader icon -->
+      <div class="loader-icon text-center" data-ng-hide="hideLoadingIcon">
+        <div data-ng-bind="loadingPercent" class="white"></div>
+        <div class="loader-inner line-scale-pulse-out">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <!-- end css loader icon -->
+    </div>
+    <!-- end wavesurfer audio stream -->
+  </div>
 </div>

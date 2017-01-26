@@ -13,7 +13,7 @@ var UploadSchema = new Schema({
   name: {
     type: String,
     default: '',
-    required: 'Please fill Upload name',
+    required: 'Please enter Upload name',
     trim: true
   },
   created: {

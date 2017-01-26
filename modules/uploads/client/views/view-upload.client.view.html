@@ -4,11 +4,6 @@
   </div>
   <div class="row">
 
-    <div class="pull-left">
-      <button class="btn btn-primary" ng-click="startPlayback();">Start</button>
-      <button class="btn btn-default" ng-click="pausePlayback();">Pause</button>
-    </div>
-
     <div class="pull-right" data-ng-show="vm.upload.isCurrentUserOwner">
       <a class="btn btn-primary"
          data-ui-sref="uploads.edit({ uploadId: vm.upload._id })">
@@ -18,24 +13,6 @@
         <i class="glyphicon glyphicon-trash"></i>
       </a>
     </div>
-  </div>
-  <div class="row">
-    <!-- wavesurfer audio stream interface -->
-    <div id="audiostream" class="audiostream" data-src="{{vm.upload.filePath}}">
-      <!-- css loader icon -->
-      <div class="loader-icon text-center" data-ng-hide="hideLoadingIcon">
-        <div data-ng-bind="loadingPercent"></div>
-        <div class="loader-inner line-scale-pulse-out">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <!-- end css loader icon -->
-    </div>
-    <!-- end wavesurfer audio stream -->
   </div>
   <div class="row">
     <small>

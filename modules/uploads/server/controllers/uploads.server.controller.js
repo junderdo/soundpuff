@@ -152,7 +152,7 @@ exports.uploadByID = function(req, res, next, id) {
       return next(err);
     } else if (!upload) {
       return res.status(404).send({
-        message: 'No Upload with that identifier has been found'
+        message: 'No Upload with that id has been found'
       });
     }
     req.upload = upload;

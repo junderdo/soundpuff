@@ -37,9 +37,13 @@ a:hover .header-profile-image {
   display: inline;
 }
 
+.white {
+    color: white;
+}
+
 /* loaders.css customizations */
 .line-scale-pulse-out > div {
-  background: violet;
+  background: dodgerblue;
 }
 
 .loader-icon {
@@ -47,10 +51,39 @@ a:hover .header-profile-image {
   margin-top:36px;
 }
 
-/* audio stream div */
+.footer-controls {
+  position: relative;
+  height: 128px;
+  width: 100%;
+}
+
 .audiostream {
-  background-color: white;
-  height:128px;
+  background-image: linear-gradient(to bottom, #3c3c3c 0%, #222 100%);
+  width: 100%;
+  height: 128px;
+}
+.audiostream, .playback-controls, .playback-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.playback-controls, .playback-overlay {
+	z-index: 10;
+}
+.playback-controls {
+    width: 100px;
+}
+
+.playback-control-button {
+    font-size: 80px;
+    color: white;
+    cursor: pointer;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+.playback-control-button:hover {
+    color: grey;
 }
 
 .footer {

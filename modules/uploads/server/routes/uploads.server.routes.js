@@ -7,7 +7,7 @@ var uploadsPolicy = require('../policies/uploads.server.policy'),
   uploads = require('../controllers/uploads.server.controller');
 
 module.exports = function(app) {
-  // Uploads Routes
+  // uploads Routes
   app.route('/api/uploads').all(uploadsPolicy.isAllowed)
     .get(uploads.list)
     .post(uploads.create);
@@ -20,6 +20,6 @@ module.exports = function(app) {
     .put(uploads.update)
     .delete(uploads.delete);
 
-  // Finish by binding the Upload middleware
+  // bind upload middleware
   app.param('uploadId', uploads.uploadByID);
 };

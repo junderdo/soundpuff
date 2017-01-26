@@ -6,9 +6,9 @@
     .module('uploads')
     .controller('UploadsController', UploadsController);
 
-  UploadsController.$inject = ['$scope', '$state', 'Authentication', 'uploadResolve', 'FileUploader', '$timeout', '$window'];
+  UploadsController.$inject = ['$scope', '$state', 'Authentication', 'uploadResolve', 'FileUploader', '$timeout', '$window', '$rootScope'];
 
-  function UploadsController ($scope, $state, Authentication, upload, FileUploader, $timeout, $window) {
+  function UploadsController ($scope, $state, Authentication, upload, FileUploader, $timeout, $window, $rootScope) {
     var vm = this;
 
     vm.authentication = Authentication;
@@ -22,51 +22,11 @@
     function init() {
       // load the streamer if we're on a view state with an id
       if (vm.upload._id) {
-
-        // show the loading icon until the stream loads
-        $scope.hideLoadingIcon = false;
-        $scope.loadingPercent = '0%';
-
-        // init the wavesurfer streaming interface
-        var wavesurfer = $window.WaveSurfer.create({
-          container: '#audiostream',
-          waveColor: 'violet',
-          progressColor: 'purple',
-          barWidth: 2,
-          cursorWidth: 0 // hide the cursor
-        });
-
-        // attempt to load the stream
-        wavesurfer.load(vm.upload.filePath);
-
-        wavesurfer.on('loading', function(percent) {
-          $scope.$apply(function() {
-            if (percent < 100) {
-              $scope.loadingPercent = percent + '%';
-            } else {
-              $scope.loadingPercent = 'processing audio...';
-            }
-          });
-        });
-
-        wavesurfer.on('ready', function () {
-          // auto-start?
-          // wavesurfer.play();
-          // apply the hideLoadingIcon value of false such that it is re-rendered and hidden
-          $scope.$apply(function() {
-            $scope.hideLoadingIcon = true;
-          });
-        });
-
-        // attach the wavesurfer to the controller for later usage
-        vm.wavesurfer = wavesurfer;
-
-
-        // when ths user leaves the view we'll stop playback for now
-        // until we come up with a global playback toolbar (on the bottom of app layout)
-        $scope.$on('$destroy', function() {
-          $scope.stopPlayback();
-        });
+		 // set it in the window
+		 $window.audiostream = vm.upload;
+		 // broadcast the message to footer controller where playback controls are
+		 //$scope.$emit("audiostream-load", { stream: vm.upload });
+		 $rootScope.$broadcast("audiostream-load", { stream: vm.upload });
 
       }
     }
